@@ -23,7 +23,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+if (defined('ENVIRONMENT')) {
+    switch (ENVIRONMENT) {
+        case 'development':
+            $config['base_url'] = 'http://localhost:8000/Pi-Alarm';
+            break;
+
+        case 'production':
+            $config['base_url'] = 'http://www.pi-alarm.com';
+            break;
+
+        default:
+            exit('The system folder location is not set correctly');
+    }
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +48,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';  //index.php
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +65,7 @@ $config['index_page'] = 'index.php';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']	= 'AUTO';
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +77,7 @@ $config['uri_protocol']	= 'REQUEST_URI';
 |
 | https://codeigniter.com/user_guide/general/urls.html
 */
-$config['url_suffix'] = '';
+$config['url_suffix'] = '.html';
 
 /*
 |--------------------------------------------------------------------------
