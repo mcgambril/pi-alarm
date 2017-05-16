@@ -2,20 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: Matthew
- * Date: 5/7/2017
- * Time: 8:12 PM
+ * Date: 05/15/2017
+ * Time: 10:39 PM
+ * Pi-Alarm/application/controllers/home.php
  */
 
-class Home extends CI_Controller
-{
+class Home extends CI_Controller {
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
     }
 
-    public function index()
-    {
+    public function index() {
         $this->load->view('home_view');
     }
 }

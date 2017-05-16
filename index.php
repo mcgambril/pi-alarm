@@ -61,7 +61,11 @@
         default:
             define('ENVIRONMENT', 'production');
             break;
-	}
+    }
+
+    //echo ENVIRONMENT . '    ';
+    //echo dirname(__FILE__) . '    ';
+    //echo phpinfo();
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -70,39 +74,31 @@
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
-if(defined('ENVIRONMENT'))
+switch (ENVIRONMENT)
 {
-    switch (ENVIRONMENT)
-    {
-        case 'development':
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            break;
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
 
-        case 'testing':
-        case 'production':
-            /*ini_set('display_errors', 0);
-            if (version_compare(PHP_VERSION, '5.3', '>='))
-            {
-                error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
-            }
-            else
-            {
-                error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
-            }*/
+	//case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
 
-        //error_reporting(0);
-        error_reporting(E_ALL); 
-        ini_set('display_errors',1);
-            break;
-
-        default:
-            header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-            echo 'The application environment is not set correctly.';
-            exit(1); // EXIT_ERROR
-    }
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
 }
-
 
 /*
  *---------------------------------------------------------------
@@ -112,22 +108,23 @@ if(defined('ENVIRONMENT'))
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-if (defined('ENVIRONMENT')) {
-    switch (ENVIRONMENT) {
-        case 'development':
-            $system_path = 'system';
+	//$system_path = 'system';
+    if (defined('ENVIRONMENT')) {
+        switch (ENVIRONMENT) {
+            case 'development':
+                $system_path = 'system';
             break;
 
-        case 'testing':
+        //case 'testing':
 
-        case 'production':
-            $system_path = '../system';
+            case 'production':
+                $system_path = '../system';
             break;
 
-        default:
-            exit('The system folder location is not set correctly');
+            default:
+                exit('The system folder location is not set correctly');
+        }
     }
-}
 
 /*
  *---------------------------------------------------------------
@@ -144,22 +141,23 @@ if (defined('ENVIRONMENT')) {
  *
  * NO TRAILING SLASH!
  */
-if (defined('ENVIRONMENT')) {
-    switch (ENVIRONMENT) {
-        case 'development':
-            $application_folder = 'application';
+	//$application_folder = 'application';
+    if (defined('ENVIRONMENT')) {
+        switch (ENVIRONMENT) {
+            case 'development':
+                $application_folder = 'application';
             break;
 
-        case 'testing':
+        //case 'testing':
 
-        case 'production':
-            $application_folder = '../application';
+            case 'production':
+                $application_folder = '../application';
             break;
 
-        default:
-            exit('The application folder location is not set correctly');
+            default:
+                exit('The application folder location is not set correctly');
+        }
     }
-}
 
 /*
  *---------------------------------------------------------------
@@ -223,20 +221,6 @@ if (defined('ENVIRONMENT')) {
  */
 	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-/*
-|---------------------------------------------------------------
- | DEFAULT TIMEZONE
-|---------------------------------------------------------------
- |
- | Set the default timezone for date/time functions to use if
- | none is set on the server.
- |
- */
-
-if( ! ini_get('date.timezone') )
-{
-    date_default_timezone_set('GMT');
-}
 
 
 // --------------------------------------------------------------------
