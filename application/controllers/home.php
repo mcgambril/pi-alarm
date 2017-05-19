@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Created by PhpStorm.
  * User: Matthew
@@ -11,10 +12,12 @@ class Home extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        require_once APPPATH . "third_party/Milight.php";
     }
 
-
     public function index() {
+
+
         //echo phpinfo();
         //current api server is http://api.easybulb.com/v1/
         //ctrl_box private ip address 192.168.1.69
@@ -34,8 +37,9 @@ class Home extends CI_Controller {
         //socket_close($socket);
 
         $params = array('ip' => $ctrl_box);
+        //$this->load->add_package_path(APPPATH. 'third_party/Milight.php');
         $this->load->library('milight', $params);
-        $this->milight->setColorRendering(ColorRendering::WW);
+        $this->milight->setColorRendering(ColorRendering::WW); //CW,WWX,WW
         $args = array (
             'action' => 'on',
             'zone' => 0x01

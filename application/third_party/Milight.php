@@ -1,5 +1,6 @@
 <?php
-namespace libraries;    //changed file path
+namespace third_party;    //changed file path
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Entry point
@@ -28,6 +29,10 @@ class Milight
         $this->_command     = null;
         $this->_sock        = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         $this->_bridge      = $this->getWifiBridgeSession();
+    }
+
+    public function index() {
+        echo 'Milight class works';
     }
     
     private function sendCommand($bytes)

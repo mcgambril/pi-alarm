@@ -1,5 +1,5 @@
 <?php
-namespace v6;
+namespace third_party;
 
 /**
  * 

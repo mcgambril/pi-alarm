@@ -1,5 +1,5 @@
 <?php
-namespace libraries\Command;  //changed file path
+namespace third_party\Command;  //changed file path
 
 /**
  *
